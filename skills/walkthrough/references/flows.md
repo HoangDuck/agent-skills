@@ -14,21 +14,16 @@ For someone who knows the product, not the code.
 
 ## Implementation flow — "how does the code carry it out?"
 
-For a developer who has not read it. The goal is that they could explain the code without opening it.
+For a developer who has not read it: enough to explain the code without opening it, in as few lines as possible.
 
-1. **Hop table** per entry point: `trigger → UI or route → state or handler → service → data / external → response → UI update`. One row per hop: component (with `MỚI`/`ĐỔI` for a change), the function it runs, what it reads and writes.
-2. **Diagram:** `sequenceDiagram` across the real components (4–7 participants; group the rest).
-3. **Code walk:** for each hop that holds logic, a short excerpt copied from the file, then what the important lines do:
-   - Keep 5–20 lines: the signature and the lines that decide something (validation, branching, calculation, query, write, error handling). Replace the rest with `// ...` (or the language's comment). Never invent or "clean up" code; copy it.
-   - Header: `` `path/to/file.ext:start-end` — what this does ``.
-   - Under it, a short list keyed by line number or symbol: what the line does and why it matters ("dòng 42: kiểm mã trước khi khoá dòng, nên hai request song song có thể cùng qua"). Point out surprising behaviour, implicit defaults, and what is *not* done.
-   - For a change, show the diff instead (` ```diff `), trimmed the same way, so removed and added lines are visible.
-   - Skip hops that only pass data along; say so in the table ("chỉ chuyển tiếp").
-4. **Data shapes:** the request and response bodies, the main model or table fields touched, and the in-app state, each as a small example (JSON or the model's fields), noting which field each hop writes.
-5. **Side effects:** jobs queued, events emitted, caches touched, external calls, files written — each with where it happens.
-6. **Error path:** for each hop, what an error becomes (thrown, converted, retried, shown, swallowed), with the line.
+1. **Hop table**, one row per hop of the main flow: `# | Component (MỚI/ĐỔI) | Function | Writes | On error`. "Writes" names the state, field or side effect (job, event, external call); "On error" says what an error becomes (thrown, returned code, retried, shown, swallowed). Hops that only pass data along say "chuyển tiếp".
+2. **Diagram:** `sequenceDiagram`, only when there are 4 or more participants.
+3. **Code** for at most 4 hops, those that decide something (validation, branching, calculation, query, write, error handling):
+   - Header `` `file:start-end` — what it does ``, then up to 10 lines copied from the file (a ` ```diff ` for a change). Trim the rest with `// ...`; never rewrite code.
+   - At most 3 notes under it, keyed by line: what the line does that matters, especially surprises, implicit defaults and what is missing.
+4. **Request / response:** one small example, only if the flow crosses an API.
 
-Default depth: the main flow gets full code walks. Other flows get the hop table only, unless the user says "chi tiết". "Nhanh" drops the code walk.
+"Chi tiết" lifts the 4-hop limit and adds the other flows. "Nhanh" keeps only the hop table.
 
 ## Usage flow — "how do I use or call it?"
 

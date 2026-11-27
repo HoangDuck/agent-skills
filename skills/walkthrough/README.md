@@ -3,7 +3,7 @@
 AI viết code rất nhiều, đọc tay không kịp. Skill này dẫn bạn đi qua code theo ba góc nhìn, kèm vài chỗ đáng tự đọc:
 
 - **Business flow:** làm gì cho ai, các bước nghiệp vụ, quy tắc, kết quả.
-- **Implementation flow:** code chạy qua những lớp nào, trích đoạn code then chốt kèm giải thích từng dòng quan trọng (với thay đổi thì hiện dạng diff), dữ liệu đi đâu, lỗi được xử lý ra sao, kèm sequence diagram.
+- **Implementation flow:** bảng các bước (ghi gì, lỗi thành gì) và tối đa 4 đoạn code then chốt kèm ghi chú ngắn (với thay đổi thì hiện dạng diff).
 - **Usage flow:** tìm tính năng ở đâu, gọi API thế nào, cần cấu hình gì, thử bằng tay ra sao.
 
 ## Dùng
