@@ -7,6 +7,7 @@ Bộ skill cho Claude Code của Duc. Mỗi skill là một thư mục trong `sk
 | Skill | Dùng để | Gọi |
 |---|---|---|
 | [module-impact](skills/module-impact/README.md) | Kiểm ảnh hưởng của module, field, API, màn hình, flow: trong module và liên module | `/module-impact <hỏi bằng lời>` |
+| [walkthrough](skills/walkthrough/README.md) (V1) | Giải thích code (nhất là thay đổi AI vừa viết) theo business, implementation và usage flow | `/walkthrough <nhánh, PR, tính năng…>` |
 
 ## Cài
 
