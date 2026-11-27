@@ -1,9 +1,9 @@
 # `/walkthrough` (V1, prototype)
 
-AI viết code rất nhiều, đọc tay không kịp. Skill này dẫn bạn đi qua code theo ba góc nhìn, kèm vài chỗ đáng tự đọc:
+AI viết code rất nhiều, đọc tay không kịp, nhưng dev vẫn phải hiểu khá chi tiết những gì chạy bên dưới. Skill này dẫn bạn đi qua code theo ba góc nhìn, trình bày gọn nhưng đủ sâu, kèm vài chỗ đáng tự đọc:
 
 - **Business flow:** làm gì cho ai, các bước nghiệp vụ, quy tắc, kết quả.
-- **Implementation flow:** bảng các bước (ghi gì, lỗi thành gì) và tối đa 4 đoạn code then chốt kèm ghi chú ngắn (với thay đổi thì hiện dạng diff).
+- **Implementation flow:** bảng các bước (ghi gì, lỗi thành gì), đoạn code then chốt của mọi bước có logic kèm ghi chú ngắn (với thay đổi thì hiện dạng diff), và những gì framework làm ngầm bên dưới (middleware, interceptor, DI, ORM, transaction…).
 - **Usage flow:** tìm tính năng ở đâu, gọi API thế nào, cần cấu hình gì, thử bằng tay ra sao.
 
 ## Dùng

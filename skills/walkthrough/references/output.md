@@ -4,7 +4,7 @@ Write for someone who knows the product and will maintain this code, but has not
 
 1. **Tóm tắt** — two or three sentences: what this does (or what the change does), for whom, and the one thing to watch.
 2. **Business flow** — steps in plain words, then the flowchart.
-3. **Implementation flow** — hop table, diagram if needed, up to 4 code excerpts with short notes, per flows.md.
+3. **Implementation flow** — hop table, diagram if needed, code excerpts with short notes for every deciding hop, what runs underneath, per flows.md.
 4. **Usage flow** — where to find it or how to call it, setup, how to try it by hand.
 5. **Cần chú ý** — findings from the AI-code checklist or the failure walk, most serious first: `Mức | Vấn đề | Hậu quả`.
 6. **Nên tự đọc** — at most 5 places: `Chỗ | Vì sao`.
@@ -13,7 +13,7 @@ Write for someone who knows the product and will maintain this code, but has not
 
 ## Rules
 
-- Sections 1–6 fit in about two screens, code included; beyond that, write the report file and keep the summary and findings in chat.
+- Keep each part tight, but do not drop depth to save space: when the answer passes about three screens, write the full version to the report file and keep the summary, findings and read-by-hand list in chat.
 - Code excerpts are copied, never rewritten; trimmed parts are marked with a comment.
 - Business and usage flows use names a user sees (screen, button, report), not classes or paths.
 - Mermaid diagrams: quote labels with spaces (`A["Tạo đơn"]`), keep each to about 12 nodes; split rather than cram.

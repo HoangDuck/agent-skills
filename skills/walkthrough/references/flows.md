@@ -14,16 +14,17 @@ For someone who knows the product, not the code.
 
 ## Implementation flow — "how does the code carry it out?"
 
-For a developer who has not read it: enough to explain the code without opening it, in as few lines as possible.
+For a developer who will maintain it: after reading, they understand in detail what runs underneath, without opening the files. Compact format, deep coverage.
 
 1. **Hop table**, one row per hop of the main flow: `# | Component (MỚI/ĐỔI) | Function | Writes | On error`. "Writes" names the state, field or side effect (job, event, external call); "On error" says what an error becomes (thrown, returned code, retried, shown, swallowed). Hops that only pass data along say "chuyển tiếp".
 2. **Diagram:** `sequenceDiagram`, only when there are 4 or more participants.
-3. **Code** for at most 4 hops, those that decide something (validation, branching, calculation, query, write, error handling):
+3. **Code** for every hop that decides something (validation, branching, calculation, query, write, error handling, state change):
    - Header `` `file:start-end` — what it does ``, then up to 10 lines copied from the file (a ` ```diff ` for a change). Trim the rest with `// ...`; never rewrite code.
-   - At most 3 notes under it, keyed by line: what the line does that matters, especially surprises, implicit defaults and what is missing.
-4. **Request / response:** one small example, only if the flow crosses an API.
+   - At most 3 notes under it, keyed by line: what the line does and why it matters, especially surprises, implicit defaults and what is missing.
+4. **Underneath (ẩn bên dưới):** what the framework or libraries do on this path that the code does not show: middleware and interceptors that run, DI and lifecycle (when an object is created, reused, disposed), ORM behaviour (lazy loading, transactions, hooks, soft delete), serialization and naming conversion, caching, retries, background isolates or goroutines. One line each, with where it is configured. Only what actually applies, verified in code or config.
+5. **Request / response:** one small example, only if the flow crosses an API.
 
-"Chi tiết" lifts the 4-hop limit and adds the other flows. "Nhanh" keeps only the hop table.
+Depth: the main flow gets everything above; other flows get the hop table and code for their riskiest hop. "Nhanh" keeps only the hop table. "Chi tiết" gives every flow the full treatment.
 
 ## Usage flow — "how do I use or call it?"
 
