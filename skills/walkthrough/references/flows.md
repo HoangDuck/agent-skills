@@ -14,17 +14,19 @@ For someone who knows the product, not the code.
 
 ## Implementation flow — "how does the code carry it out?"
 
-For a developer who will maintain it: after reading, they understand in detail what runs underneath, without opening the files. Compact format, deep coverage.
+For a developer who will maintain it: they should understand in detail what runs underneath, in far less time than reading the code. **Detail lives in plain-word explanation, not in the amount of code shown.**
 
-1. **Hop table**, one row per hop of the main flow: `# | Component (MỚI/ĐỔI) | Function | Writes | On error`. "Writes" names the state, field or side effect (job, event, external call); "On error" says what an error becomes (thrown, returned code, retried, shown, swallowed). Hops that only pass data along say "chuyển tiếp".
+1. **Hop table**, one row per hop of the main flow: `# | Component (MỚI/ĐỔI) | Logic chính | Writes | On error`.
+   - "Logic chính": in plain words, what this hop decides or computes, with the real values (limits, conditions, formulas, statuses), e.g. "từ chối nếu `used >= max_uses`; giảm = % × tổng, không trần". "chuyển tiếp" when it only passes data along.
+   - "Writes": state, field or side effect (job, event, external call). "On error": what an error becomes (thrown, returned code, retried, shown, swallowed).
 2. **Diagram:** `sequenceDiagram`, only when there are 4 or more participants.
-3. **Code** for every hop that decides something (validation, branching, calculation, query, write, error handling, state change):
-   - Header `` `file:start-end` — what it does ``, then up to 10 lines copied from the file (a ` ```diff ` for a change). Trim the rest with `// ...`; never rewrite code.
-   - At most 3 notes under it, keyed by line: what the line does and why it matters, especially surprises, implicit defaults and what is missing.
-4. **Underneath (ẩn bên dưới):** what the framework or libraries do on this path that the code does not show: middleware and interceptors that run, DI and lifecycle (when an object is created, reused, disposed), ORM behaviour (lazy loading, transactions, hooks, soft delete), serialization and naming conversion, caching, retries, background isolates or goroutines. One line each, with where it is configured. Only what actually applies, verified in code or config.
+3. **Code, only where the code itself is the point:** a bug or risk, money or data written, concurrency, security, or behaviour the table cannot convey in a sentence. At most 4 excerpts:
+   - Header `` `file:start-end` — what it does ``, then up to 8 lines copied from the file (a ` ```diff ` for a change), trimmed with `// ...`. Never rewrite code.
+   - At most 3 notes, keyed by line.
+4. **Underneath (ẩn bên dưới):** what the framework or libraries do on this path that the code does not show: middleware and interceptors, DI and lifecycle (created, reused, disposed), ORM behaviour (lazy loading, transactions, hooks, soft delete), serialization and naming conversion, caching, retries, background isolates or goroutines. One line each, with where it is configured; only what is verified to apply.
 5. **Request / response:** one small example, only if the flow crosses an API.
 
-Depth: the main flow gets everything above; other flows get the hop table and code for their riskiest hop. "Nhanh" keeps only the hop table. "Chi tiết" gives every flow the full treatment.
+Depth: main flow gets all of the above; other flows get the hop table only. "Nhanh": hop table without the underneath section. "Chi tiết": every flow gets the full treatment and the excerpt limit rises to 8.
 
 ## Usage flow — "how do I use or call it?"
 
